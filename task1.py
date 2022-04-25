@@ -37,6 +37,7 @@ class LinkedList:
         while node is not None:
             if node.value == val:
                 finded_nodes.append(node)
+            node = node.next
         return finded_nodes
 
     def delete(self, val, all=False):
