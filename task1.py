@@ -56,6 +56,7 @@ class LinkedList:
                         break
                 else:
                     node = node.next
+                    self.tail = node
 
 
     def clean(self):
