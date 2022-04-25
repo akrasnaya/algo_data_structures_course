@@ -41,6 +41,9 @@ class LinkedList:
         return finded_nodes
 
     def delete(self, val, all=False):
+        
+        while self.head is not None and self.head.value == val:
+            self.head = self.head.next
 
         if self.head is not None:
             node = self.head
