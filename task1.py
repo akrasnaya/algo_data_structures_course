@@ -44,16 +44,18 @@ class LinkedList:
         
         while self.head is not None and self.head.value == val:
             self.head = self.head.next
+            if all is False:
+                return
 
         if self.head is not None:
             node = self.head
             while node.next is not None:
                 if node.next.value == val:
                     node.next = node.next.next
+                    if all is False:
+                        break
                 else:
                     node = node.next
-                if all is False:
-                    break
 
 
     def clean(self):
