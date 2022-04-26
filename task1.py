@@ -67,7 +67,8 @@ class LinkedList:
 
 
     def clean(self):
-        return LinkedList()
+        self.head = None
+        self.tail = None
 
     def len(self):
         count = 0
