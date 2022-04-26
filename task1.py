@@ -91,6 +91,10 @@ class LinkedList:
                 node = self.head
                 while node is not None:
                     if node.value == afterNode.value:
-                        newNode.next = node.next
-                        node.next = newNode
+                        if node.next is not None:
+                            newNode.next = node.next
+                            node.next = newNode
+                        else:
+                            node.next = newNode
+                            self.tail = newNode
                     node = node.next
