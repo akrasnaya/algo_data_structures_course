@@ -42,9 +42,10 @@ class LinkedList2:
             return
         elif node.value == val:
             self.head = node.next
-            self.head.prev = None
             if node.next is None:
                 self.tail = None
+            else:
+                self.head.prev = None
             if all is False:
                 return
         else:
