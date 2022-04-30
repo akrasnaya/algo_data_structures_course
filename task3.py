@@ -51,7 +51,8 @@ class DynArray:
         else:
             for j in range(i, self.count - 1):
                 self.array[j] = self.array[j+1]
-            self.count = self.count - 1
 
+            self.array[self.count - 1] = 0
+            self.count = self.count - 1
             if self.count <= self.capacity // 2 and self.count > 16:
                 self.resize(int(self.capacity // 1.5))
