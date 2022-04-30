@@ -1,3 +1,5 @@
+import ctypes
+
 class DynArray:
 
     def __init__(self):
