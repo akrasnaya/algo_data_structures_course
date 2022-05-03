@@ -3,11 +3,11 @@ class Queue:
         self.queue = []
 
     def enqueue(self, item):
-        self.queue.insert(0, item)
+        self.queue.append(item)
 
     def dequeue(self):
         if self.size() != 0:
-            self.queue.pop()
+            self.queue.pop(0)
         return None
 
     def size(self):
