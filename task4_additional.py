@@ -21,13 +21,15 @@ def postfix_form(stack1):
         elif element == "*":
             stack2.push(stack2.pop() * stack2.pop())
         elif element == "-":
-            stack2.push(-(stack2.pop() - stack2.pop()))
+            stack2.push(stack2.stack[0] - stack2.stack[1])
+            stack2.pop()
+            stack2.pop()
         elif element == '/':
-            stack2.push(1/(stack2.pop() / stack2.pop()))
+            stack2.push(stack2.stack[0] / stack2.stack[1])
+            stack2.pop()
+            stack2.pop()
         elif element == "=":
             return stack2.stack[0]
         else:
             stack2.push(element)
-
-    return stack2.stack[0]
 
