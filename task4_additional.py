@@ -1,4 +1,4 @@
-from task4 import Stack
+from task4_stack import Stack
 
 
 def balanced_string(string):
@@ -10,9 +10,7 @@ def balanced_string(string):
             if stack.size() == 0:
                 return False
             stack.pop()
-    if stack.size() != 0:
-        return False
-    return True
+    return stack.size() == 0
 
 
 def postfix_form(stack1):
@@ -22,6 +20,10 @@ def postfix_form(stack1):
             stack2.push(stack2.pop() + stack2.pop())
         elif element == "*":
             stack2.push(stack2.pop() * stack2.pop())
+        elif element == "-":
+            stack2.push(-(stack2.pop() - stack2.pop()))
+        elif element == '/':
+            stack2.push(1/(stack2.pop() / stack2.pop()))
         elif element == "=":
             return stack2.stack[0]
         else:
