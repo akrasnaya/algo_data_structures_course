@@ -1,4 +1,4 @@
-from task4_stack import Stack
+from task4 import Stack
 
 
 def balanced_string(string):
