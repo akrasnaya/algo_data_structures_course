@@ -56,9 +56,9 @@ class OrderedList:
             if node.value == val:
                 return node
             elif node.value > val and self.__ascending:
-                return node
+                return None
             elif node.value < val and not self.__ascending:
-                return node
+                return None
             node = node.next
 
     def delete(self, val):
