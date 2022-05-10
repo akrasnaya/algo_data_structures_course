@@ -14,12 +14,11 @@ class HashTable:
         return None
 
     def put(self, value):
-
-        if self.seek_slot(value) is not None:
-            self.slots[self.seek_slot(value)] = value
-            return self.seek_slot(value)
-        else:
-            return None
+        ind = self.seek_slot(value)
+        if ind is not None:
+            self.slots[ind] = value
+            return ind
+        return None
 
     def find(self, value):
         ind = self.hash_fun(value)
