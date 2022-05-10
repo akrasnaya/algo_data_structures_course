@@ -44,6 +44,8 @@ class PowerSet:
 
     def issubset(self, set2):
         count = 0
+        if set2.size >= self.size():
+            return False
         for value in set2.values:
             if value in self.values:
                 count += 1
