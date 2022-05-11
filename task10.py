@@ -44,11 +44,13 @@ class PowerSet:
 
     def issubset(self, set2):
         count = 0
-        if set2.size() > self.size():
+        s1 = self.size()
+        s2 = set2.size()
+        if s2 > s1:
             return False
         for value in set2.values:
             if value in self.values:
                 count += 1
-        if count == set2.size():
+        if count == s2:
             return True
         return False
