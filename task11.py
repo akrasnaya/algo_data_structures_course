@@ -26,8 +26,8 @@ class BloomFilter:
     def is_value(self, str1):
         h1 = self.hash1(str1)
         h2 = self.hash2(str1)
-        x1 = self.filter_len - h1
-        x2 = self.filter_len - h2
-        if (self.filter >> x1) & 1 == 1 and (self.filter >> x2) & 1 == 1:
+        mask1 = (1 << h1)
+        mask2 = (1 << h2)
+        if (self.filter & mask1) and (self.filter & mask2):
             return True
         return False
