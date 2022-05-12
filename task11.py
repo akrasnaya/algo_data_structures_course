@@ -21,7 +21,12 @@ class BloomFilter:
     def add(self, str1):
         h1 = self.hash1(str1)
         h2 = self.hash2(str1)
-        self.filter = self.filter + 2 ** h1 + 2 ** h2
+        mask1 = 1 << h1
+        mask2 = 1 << h2
+        self.filter &= ~mask1
+        self.filter &= ~mask2
+        self.filter |= mask1
+        self.filter |= mask2
 
     def is_value(self, str1):
         h1 = self.hash1(str1)
