@@ -13,15 +13,18 @@ class NativeCache:
 
     def put(self, key, value):
         ind = self.hash_fun(key)
-        if self.is_key(key):
-            self.slots[ind] = value
+        if self.is_key(key) and None in self.slots and self.slots[ind] is not None:
+            for i in range(len(self.slots)):
+                if self.slots[i] is None:
+                    self.slots[i] = value
+                    break
         elif self.values.count(None) == 0 and not self.is_key(key):
             min_hits = min(self.hits)
             min_ind = self.hits.index(min_hits)
             self.hits[min_ind] = 0
             self.values[min_ind] = key
             self.slots[min_ind] = value
-        else:
+        elif not self.is_key(key) and None in self.slots:
             self.values[ind] = key
             self.slots[ind] = value
 
