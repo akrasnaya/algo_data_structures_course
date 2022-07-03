@@ -42,10 +42,13 @@ def find_second_max(X, max1, max2):
         max2 = array[0]
     return find_second_max(array[1:], max1, max2)
 
-def get_second_max(X, max1=None, max2=None):
-    if max1 is None and max2 is None:
-        max1 = X[0]
-        max2 = X[0]
+def get_second_max(X):
+    if len(X) < 3:
+        if X[0] > X[1]:
+            return X[1]
+        return X[0]
+    max1 = X[0]
+    max2 = X[0]
     return find_second_max(X, max1, max2)
 
 
