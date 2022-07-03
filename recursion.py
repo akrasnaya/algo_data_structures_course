@@ -31,11 +31,8 @@ def print_even_indexes(X):
         print(X[0])
         print_even_indexes(X[2:])
 
-def find_second_max(X, max1=None, max2=None):
+def find_second_max(X, max1, max2):
     array = X
-    if max1 is None and max2 is None:
-        max1 = array[0]
-        max2 = array[0]
     if len(array) == 0:
         return max2
     if array[0] > max1 and max2 <= max1:
@@ -44,6 +41,12 @@ def find_second_max(X, max1=None, max2=None):
     if array[0] < max1 and array[0] >= max2:
         max2 = array[0]
     return find_second_max(array[1:], max1, max2)
+
+def get_second_max(X, max1=None, max2=None):
+    if max1 is None and max2 is None:
+        max1 = X[0]
+        max2 = X[0]
+    return find_second_max(X, max1, max2)
 
 
 def get_files(path, level = 1):
