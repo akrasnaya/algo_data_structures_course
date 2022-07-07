@@ -57,7 +57,7 @@ class SimpleTree:
     def Count(self):
         if self.Root is None:
             return 0
-        count_knit = 0
+        count_knit = 1
         nodes = []
         nodes.append(self.Root)
         while len(nodes) > 0:
