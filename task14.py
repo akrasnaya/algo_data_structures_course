@@ -105,13 +105,24 @@ class BST:
                 root.RightChild = deleteNode(node.RightChild, key)
             else:
                 if node.LeftChild is None and node.RightChild is None:
-                    node = None
+                    if node.NodeKey < node.Parent.NodeKey:
+                        node.Parent.LeftChild = None
+                    else:
+                        node.Parent.RightChild = None
                     return
                 elif node.LeftChild is None:
-                    node = node.RightChild
+                    temp = node.RightChild
+                    if node.NodeKey < node.Parent.NodeKey:
+                        node.Parent.LeftChild = temp
+                    else:
+                        node.Parent.RightChild = temp
                     return
                 elif node.RightChild is None:
-                    node = node.LeftChild
+                    temp = node.LeftChild
+                    if node.NodeKey < node.Parent.NodeKey:
+                        node.Parent.LeftChild = temp
+                    else:
+                        node.Parent.RightChild = temp
                     return
 
                 temp = self.FinMinMax(node.RightChild, False)
