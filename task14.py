@@ -59,19 +59,16 @@ class BST:
                     new_node.Parent = node.LeftChild
                 else:
                     recurse(node.left)
-            # New item is greater or equal,
-            # go right until spot is found
+
             elif node.RightChild == None:
                 node.RightChild = new_node
                 new_node.Parent = node.RightChild
             else:
                 recurse(node.right)
-            # End of recurse
 
-        # Tree is empty, so new item goes at the root
         if self.Root is None:
             self.Root = new_node
-        # Otherwise, search for the item's spot
+
         else:
             recurse(self.Root)
 
@@ -93,10 +90,20 @@ class BST:
         # удаляем узел по ключу
         if self.Root is None:
             return
-        
+
         search = self.FindNodeByKey(key)
         if not search.NodeHasKey:
             return False
+
+        def find_replacement(node):
+            keys = []
+            current = node.RightChild
+            while current is not None:
+                keys.append(current.NodeKey)
+                current = current.LeftChild
+            return min(keys)
+
+
 
         def deleteNode(node, key):
 
@@ -106,40 +113,28 @@ class BST:
             if key < node.NodeKey:
                 node.LeftChild = deleteNode(node.LeftChild, key)
             elif key > node.NodeKey:
-                node.RightChild = deleteNode(node.RightChild, key)
+                root.RightChild = deleteNode(node.RightChild, key)
             else:
+
                 if node.LeftChild is None and node.RightChild is None:
-                    if node.NodeKey < node.Parent.NodeKey:
-                        node.Parent.LeftChild = None
-                    else:
-                        node.Parent.RightChild = None
+                    node = None
                     return
                 elif node.LeftChild is None:
-                    temp = node.RightChild
-                    if node.NodeKey < node.Parent.NodeKey:
-                        node.Parent.LeftChild = temp
-                    else:
-                        node.Parent.RightChild = temp
+                    node = node.RightChild
                     return
                 elif node.RightChild is None:
-                    temp = node.LeftChild
-                    if node.NodeKey < node.Parent.NodeKey:
-                        node.Parent.LeftChild = temp
-                    else:
-                        node.Parent.RightChild = temp
+                    node = node.LeftChild
                     return
 
-                temp = self.FinMinMax(node.RightChild, False)
 
-                node.NodeKey = temp.NodeKey
+                node.NodeKey = find_replacement(node)
+                deleteNode(node.RightChild, node.NodeKey)
 
-                node.RightChild = deleteNode(node.RightChild, temp.NodeKey)
+            return
 
-         
+
 
         return deleteNode(self.Root, key)
-
-
 
     def Count(self):
         if self.Root is None:
