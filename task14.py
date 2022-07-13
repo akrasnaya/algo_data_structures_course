@@ -138,15 +138,14 @@ class BST:
 
 
     def Count(self):
-        count = 0
-
-        def recurse(node):
-            if node is not None:
-                count += 1
-                recurse(node.LeftChild)
-                recurse(node.RightChild)
-
-        recurse(self.Root)
-        return count
+        if self.Root is None:
+            return 0
+        
+        def count_nodes(node):
+            if node is None:
+                return 0
+            return 1 + count_nodes(node.LeftChild) + count_nodes(node.RightChild)
+        
+        return count_nodes(self.Root)
 
 
