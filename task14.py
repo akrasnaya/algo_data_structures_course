@@ -111,9 +111,9 @@ class BST:
                 return
 
             if key < node.NodeKey:
-                node.LeftChild = deleteNode(node.LeftChild, key)
+                deleteNode(node.LeftChild, key)
             elif key > node.NodeKey:
-                root.RightChild = deleteNode(node.RightChild, key)
+                deleteNode(node.RightChild, key)
             else:
 
                 if node.LeftChild is None and node.RightChild is None:
