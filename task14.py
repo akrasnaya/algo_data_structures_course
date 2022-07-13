@@ -93,6 +93,10 @@ class BST:
         # удаляем узел по ключу
         if self.Root is None:
             return
+        
+        search = self.FindNodeByKey(key)
+        if not search.NodeHasKey:
+            return False
 
         def deleteNode(node, key):
 
@@ -102,7 +106,7 @@ class BST:
             if key < node.NodeKey:
                 node.LeftChild = deleteNode(node.LeftChild, key)
             elif key > node.NodeKey:
-                root.RightChild = deleteNode(node.RightChild, key)
+                node.RightChild = deleteNode(node.RightChild, key)
             else:
                 if node.LeftChild is None and node.RightChild is None:
                     if node.NodeKey < node.Parent.NodeKey:
@@ -131,7 +135,7 @@ class BST:
 
                 node.RightChild = deleteNode(node.RightChild, temp.NodeKey)
 
-            return False
+         
 
         return deleteNode(self.Root, key)
 
