@@ -79,73 +79,52 @@ class BST:
         # ищем максимальный/минимальный ключ в поддереве
         # возвращается объект типа BSTNode
 
-        def rec_min_max(node):
-            if node is not None:
-                if FindMax:
-                    if node.RightChild is None:
-                        return node
-                    rec_min_max(node.RightChild)
-                else:
-                    if node.LeftChild is None:
-                        return node
-                    rec_min_max(node.LeftChild)
+        current = FromNode
+        if FindMax:
+            while current.RightChild is not None:
+                current = current.RightChild
+        else:
+            while current.LeftChild is not None:
+                current = current.LeftChild
 
-
-        return rec_min_max(FromNode)
+        return current
 
     def DeleteNodeByKey(self, key):
         # удаляем узел по ключу
-        def delete_node(node, dir):
-            if dir == 'right':
-                new_node = node.RightChild.RightChild
-                if new_node is not None:
-                    node.RightChild = new_node
-                    new_node.Parent = node
-                    delete_node(new_node, 'right')
-                else:
-                    node.RightChild = None
-            else:
-                new_node = node.LeftChild.LeftChild
-                if new_node is not None:
-                    node.LeftChild = new_node
-                    new_node.Parent = node
-                    delete_node(new_node, 'left')
-                else:
-                    node.LeftChild = None
-
-
-        def find_node(node):
-            count = 0
-            if node is not None:
-                if node.RightChild.NodeKey == key:
-                    count += 1
-                    delete_node(node, 'right')
-                find_node(node.RightChild)
-                if node.LeftChild.NodeKey == key:
-                    count += 1
-                    delete_node(node, 'left')
-                find_node(node.LeftChild)
-
-            if count != 0:
-                return False
-
         if self.Root is None:
-            return 
-        if self.Root.NodeKey == key:
-            delete_node(self.Root, 'right')
-        else:
-            find_node(self.Root)
+            return
+
+        def deleteNode(node, key):
+            if node is None:
+                return
+            if key < node.NodeKey:
+                node.LeftChild = deleteNode(node.LeftChild, key)
+            elif key > node.NodeKey:
+                root.RightChild = deleteNode(node.RightChild, key)
+            else:
+                if node.LeftChild is None or node.RightChild is None:
+                    node = None
+                    return
+
+                temp = self.FinMinMax(node.RightChild, False)
+
+                node.NodeKey = temp.NodeKey
+
+                node.RightChild = deleteNode(node.RightChild, temp.NodeKey)
+
+            return
+
+        return deleteNode(self.Root, key)
+
 
 
     def Count(self):
         if self.Root is None:
             return 0
-        
         def count_nodes(node):
             if node is None:
                 return 0
             return 1 + count_nodes(node.LeftChild) + count_nodes(node.RightChild)
-        
         return count_nodes(self.Root)
 
 
