@@ -106,31 +106,37 @@ class BST:
 
 
         def deleteNode(node, key):
-
             if node is None:
                 return
-
             if key < node.NodeKey:
                 deleteNode(node.LeftChild, key)
+
             elif key > node.NodeKey:
                 deleteNode(node.RightChild, key)
+                return
             else:
-
                 if node.LeftChild is None and node.RightChild is None:
-                    node = None
+                    if node.NodeKey < node.Parent.NodeKey:
+                        node.Parent.LeftChild = None
+                    else:
+                        node.Parent.RightChild = None
                     return
                 elif node.LeftChild is None:
-                    node = node.RightChild
-                    return
+                    temp = node.RightChild
+                    node = None
+                    return temp
                 elif node.RightChild is None:
-                    node = node.LeftChild
-                    return
+                    temp = node.LeftChild
+                    node = None
+                    return temp
 
+                temp = self.FinMinMax(node.RightChild, False)
 
-                node.NodeKey = find_replacement(node)
-                deleteNode(node.RightChild, node.NodeKey)
+                node.NodeKey = temp.NodeKey
 
-            return
+                deleteNode(node.RightChild, temp.NodeKey)
+
+            return node
 
 
 
