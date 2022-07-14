@@ -108,11 +108,11 @@ class BST:
                 if node.LeftChild is None:
                     temp = node.RightChild
                     node = None
-                    return temp
+                    return True
                 elif node.RightChild is None:
                     temp = node.LeftChild
                     node = None
-                    return temp
+                    return True
 
                 temp = self.FinMinMax(node.RightChild, False)
 
@@ -120,7 +120,7 @@ class BST:
 
                 node.RightChild = deleteNode(node.RightChild, temp.NodeKey)
 
-            return node
+            return True
 
         return deleteNode(self.Root, key)
 
