@@ -89,39 +89,23 @@ class BST:
     def DeleteNodeByKey(self, key):
         # удаляем узел по ключу
         if self.Root is None:
-            return
+            return self.Root
 
         search = self.FindNodeByKey(key)
         if not search.NodeHasKey:
             return False
 
-        def find_replacement(node):
-            keys = []
-            current = node.RightChild
-            while current is not None:
-                keys.append(current.NodeKey)
-                current = current.LeftChild
-            return min(keys)
-
-
 
         def deleteNode(node, key):
             if node is None:
-                return
+                return node
             if key < node.NodeKey:
-                deleteNode(node.LeftChild, key)
+                node.LeftChild = deleteNode(node.LeftChild, key)
 
             elif key > node.NodeKey:
-                deleteNode(node.RightChild, key)
-                return
+                node.RightChild = deleteNode(node.RightChild, key)
             else:
-                if node.LeftChild is None and node.RightChild is None:
-                    if node.NodeKey < node.Parent.NodeKey:
-                        node.Parent.LeftChild = None
-                    else:
-                        node.Parent.RightChild = None
-                    return
-                elif node.LeftChild is None:
+                if node.LeftChild is None:
                     temp = node.RightChild
                     node = None
                     return temp
@@ -134,14 +118,13 @@ class BST:
 
                 node.NodeKey = temp.NodeKey
 
-                deleteNode(node.RightChild, temp.NodeKey)
+                node.RightChild = deleteNode(node.RightChild, temp.NodeKey)
 
             return node
 
-
-
         return deleteNode(self.Root, key)
 
+    
     def Count(self):
         if self.Root is None:
             return 0
