@@ -30,6 +30,11 @@ def create_tree_to_test():
 
     return tree
 
+def create_tree_one_node():
+    root = BSTNode(1, 1, None)
+    tree = BST(root)
+    return tree
+
 class TestBST(unittest.TestCase):
     def test_deleting_root(self):
         tree = create_tree_to_test()
@@ -54,6 +59,12 @@ class TestBST(unittest.TestCase):
         tree = create_tree_to_test()
         res = tree.DeleteNodeByKey(2)
         self.assertEqual(res, False)
+   
+    def test_delete_last_node(self):
+        tree = create_tree_one_node()
+        tree.DeleteNodeByKey(1)
+        self.assertEqual(tree.Count(), 0)
+        self.assertEqual(tree.Root, None)
 
 
 if __name__ == '__main__':
