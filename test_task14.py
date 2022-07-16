@@ -33,19 +33,27 @@ def create_tree_to_test():
 class TestBST(unittest.TestCase):
     def test_deleting_root(self):
         tree = create_tree_to_test()
-        tree.DeleteNodeByKey(10)
+        res = tree.DeleteNodeByKey(10)
         self.assertEqual(tree.Root.NodeKey, 11)
         self.assertListEqual(extract_node_keys(tree), [11, 8, 6, 9, 12, 14])
+        self.assertEqual(res.NodeKey, 10)
 
     def test_deleting_node(self):
         tree = create_tree_to_test()
-        tree.DeleteNodeByKey(8)
+        res = tree.DeleteNodeByKey(8)
         self.assertListEqual(extract_node_keys(tree), [10, 9, 6, 12, 11, 14])
+        self.assertEqual(res.NodeKey, 8)
 
     def test_deleting_leaf(self):
         tree = create_tree_to_test()
-        tree.DeleteNodeByKey(14)
+        res = tree.DeleteNodeByKey(14)
         self.assertListEqual(extract_node_keys(tree), [10, 8, 6, 9, 12, 11])
+        self.assertEqual(res.NodeKey, 14)
+
+    def test_delete_absent_node(self):
+        tree = create_tree_to_test()
+        res = tree.DeleteNodeByKey(2)
+        self.assertEqual(res, False)
 
 
 if __name__ == '__main__':
