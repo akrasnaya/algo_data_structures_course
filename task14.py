@@ -94,6 +94,10 @@ class BST:
         search = self.FindNodeByKey(key)
         if not search.NodeHasKey:
             return False
+        
+        if self.Root.NodeKey == key and self.Root.LeftChild is None and self.Root.RightChild is None:
+            self.Root = None
+            return
 
 
         def deleteNode(node, key):
