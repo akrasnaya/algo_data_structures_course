@@ -97,7 +97,7 @@ class BST:
         
         if self.Root.NodeKey == key and self.Root.LeftChild is None and self.Root.RightChild is None:
             self.Root = None
-            return
+            return True
 
 
         def deleteNode(node, key):
