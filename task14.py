@@ -40,7 +40,7 @@ class BST:
                 return recurse(node.LeftChild)
             else:
                 return recurse(node.RightChild)
-        # ищем в дереве узел и сопутствующую информацию по ключу
+
         return recurse(self.Root) # возвращает BSTFind
 
     def AddKeyValue(self, key, val):
@@ -51,7 +51,6 @@ class BST:
             return
 
         def recurse(node):
-            # New item is less, go left until spot is found
             if key < node.NodeKey:
                 if node.LeftChild == None:
                     node.LeftChild = new_node
