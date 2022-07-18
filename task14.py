@@ -45,30 +45,28 @@ class BST:
 
     def AddKeyValue(self, key, val):
 
-        new_node = BSTNode()
-        new_node.NodeKey = key
-        new_node.NodeValue = val
+        new_node = BSTNode(key, val, None)
+
+        if self.FindNodeByKey(key).NodeHasKey:
+            return
 
         def recurse(node):
             # New item is less, go left until spot is found
-            if key == node.NodeKey:
-                return False
-            elif key < node.NodeKey:
+            if key < node.NodeKey:
                 if node.LeftChild == None:
                     node.LeftChild = new_node
                     new_node.Parent = node.LeftChild
                 else:
-                    recurse(node.left)
-
-            elif node.RightChild == None:
-                node.RightChild = new_node
-                new_node.Parent = node.RightChild
+                    recurse(node.LeftChild)
             else:
-                recurse(node.right)
+                if node.RightChild == None:
+                    node.RightChild = new_node
+                    new_node.Parent = node.RightChild
+                else:
+                    recurse(node.right)
 
         if self.Root is None:
             self.Root = new_node
-
         else:
             recurse(self.Root)
 
