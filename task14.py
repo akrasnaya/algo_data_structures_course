@@ -46,6 +46,7 @@ class BST:
     def AddKeyValue(self, key, val):
 
         new_node = BSTNode(key, val, None)
+        count1 = self.Count()
 
         if self.FindNodeByKey(key).NodeHasKey:
             return False
@@ -55,14 +56,12 @@ class BST:
                 if node.LeftChild == None:
                     node.LeftChild = new_node
                     new_node.Parent = node
-                    return True
                 else:
                     recurse(node.LeftChild)
-            else:
+            elif key >= node.NodeKey:
                 if node.RightChild == None:
                     node.RightChild = new_node
                     new_node.Parent = node
-                    return True
                 else:
                     recurse(node.RightChild)
 
@@ -71,6 +70,9 @@ class BST:
             return True
         else:
             recurse(self.Root)
+            count2 = self.Count()
+            if count2 > count1:
+                return True
 
     def FinMinMax(self, FromNode, FindMax):
         # ищем максимальный/минимальный ключ в поддереве
