@@ -54,13 +54,13 @@ class BST:
             if key < node.NodeKey:
                 if node.LeftChild == None:
                     node.LeftChild = new_node
-                    new_node.Parent = node.LeftChild
+                    new_node.Parent = node
                 else:
                     recurse(node.LeftChild)
             else:
                 if node.RightChild == None:
                     node.RightChild = new_node
-                    new_node.Parent = node.RightChild
+                    new_node.Parent = node
                 else:
                     recurse(node.RightChild)
 
