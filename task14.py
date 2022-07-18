@@ -62,7 +62,7 @@ class BST:
                     node.RightChild = new_node
                     new_node.Parent = node.RightChild
                 else:
-                    recurse(node.right)
+                    recurse(node.RightChild)
 
         if self.Root is None:
             self.Root = new_node
