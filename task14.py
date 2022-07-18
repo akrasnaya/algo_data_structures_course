@@ -48,24 +48,27 @@ class BST:
         new_node = BSTNode(key, val, None)
 
         if self.FindNodeByKey(key).NodeHasKey:
-            return
+            return False
 
         def recurse(node):
             if key < node.NodeKey:
                 if node.LeftChild == None:
                     node.LeftChild = new_node
                     new_node.Parent = node
+                    return True
                 else:
                     recurse(node.LeftChild)
             else:
                 if node.RightChild == None:
                     node.RightChild = new_node
                     new_node.Parent = node
+                    return True
                 else:
                     recurse(node.RightChild)
 
         if self.Root is None:
             self.Root = new_node
+            return True
         else:
             recurse(self.Root)
 
