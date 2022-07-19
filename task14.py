@@ -172,9 +172,9 @@ class BST:
         if order == 0:
             in_order(self.Root)
         elif order == 1:
-            pre_order(self.Root)
-        else:
             post_order(self.Root)
+        else:
+            pre_order(self.Root)
 
         return tuple(nodes)
 
