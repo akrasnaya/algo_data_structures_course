@@ -29,18 +29,20 @@ class BST:
             return result
 
         def recurse(node):
+            result.Node = node
             if node is None:
-                result.ToLeft = True
                 return result
             elif key == node.NodeKey:
-                result.Node = node
                 result.NodeHasKey = True
+                result.ToLeft = False
                 return result
             elif key < node.NodeKey:
+                result.ToLeft = True
                 return recurse(node.LeftChild)
             else:
+                result.ToLeft = False
                 return recurse(node.RightChild)
-
+        # ищем в дереве узел и сопутствующую информацию по ключу
         return recurse(self.Root) # возвращает BSTFind
 
     def AddKeyValue(self, key, val):
