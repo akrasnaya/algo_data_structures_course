@@ -143,5 +143,69 @@ class BST:
                 return 0
             return 1 + count_nodes(node.LeftChild) + count_nodes(node.RightChild)
         return count_nodes(self.Root)
+    
+    
+    
+    def DeepAllNodes(self, order):
+        if self.Root is None:
+            return tuple(None,)
+        nodes = []
+
+        def in_order(node):
+            if node is not None:
+                in_order(node.LeftChild)
+                nodes.append(node)
+                in_order(node.RightChild)
+
+        def pre_order(node):
+            if node is not None:
+                nodes.append(node)
+                pre_order(node.LeftChild)
+                pre_order(node.RightChild)
+
+        def post_order(node):
+            if node is not None:
+                post_order(node.LeftChild)
+                post_order(node.RightChild)
+                nodes.append(node)
+
+        if order == 0:
+            in_order(self.Root)
+        elif order == 1:
+            pre_order(self.Root)
+        else:
+            post_order(self.Root)
+
+        return tuple(nodes)
+
+
+    def WideAllNodes(self):
+
+        if self.Root is None:
+            return tuple(None, )
+
+        nodes = []
+
+        def get_level(node):
+            if node is None:
+                return 0
+            left_level = get_level(node.LeftChild)
+            right_level = get_level(node.RightChild)
+            return max(left_level, right_level) + 1
+
+        def get_nodes_at_level(node, level):
+            if node is None:
+                return
+            if level == 0:
+                nodes.append(node)
+            elif level > 0:
+                get_nodes_at_level(node.LeftChild, level - 1)
+                get_nodes_at_level(node.RightChild, level - 1)
+
+        tree_height = get_level(self.Root)
+        for i in range(tree_height):
+            get_nodes_at_level(self.Root, i)
+
+        return tuple(nodes)
 
 
