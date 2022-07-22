@@ -50,6 +50,9 @@ class aBST:
         def search(node):
             if node is None:
                 return -1
+            elif key == node:
+                ind = self.Tree.index(node)
+                return ind
             elif key < node:
                 ind = self.Tree.index(node)
                 left = 2 * ind + 1
