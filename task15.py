@@ -15,6 +15,10 @@ class aBST:
         if None not in self.Tree and key not in self.Tree:
             return None
 
+        for node in self.Tree:
+            if node is not None and node == key:
+                return self.Tree.index(node)
+
         def search(node):
             if node is None:
                 return None
