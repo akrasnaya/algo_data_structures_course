@@ -52,15 +52,32 @@ class aBST:
             self.Tree[0] = key
             return 0
 
-        if self.FindKeyIndex(key) is not None:
-            if self.FindKeyIndex(key) < 0:
-                parent = -self.FindKeyIndex(key)
-                if key >= self.Tree[parent]:
-                    ind = 2 * parent + 2
-                else:
-                    ind = 2 * parent + 1
+        if self.FindKeyIndex(key) is None:
+            return -1
+
+        def search(node):
+            if node is None:
+                return -1
+            elif key == node:
+                ind = self.Tree.index(node)
+                return ind
+            elif key < node:
+                ind = self.Tree.index(node)
+                left = 2 * ind + 1
+                if left > len(self.Tree) - 1:
+                    return -1
+                if self.Tree[left] is None:
+                    self.Tree[left] = key
+                    return left
+                return search(self.Tree[left])
             else:
-                ind = self.FindKeyIndex(key)
-            self.Tree[ind] = key
-            return ind
-        return -1
+                ind = self.Tree.index(node)
+                right = 2 * ind + 2
+                if right > len(self.Tree):
+                    return -1
+                if self.Tree[right] is None:
+                    self.Tree[right] = key
+                    return right
+                return search(self.Tree[right])
+
+        return search(self.Tree[0])
