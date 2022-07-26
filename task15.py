@@ -47,8 +47,6 @@ class aBST:
 
     def AddKey(self, key):
         # добавляем ключ в массив
-
-        # добавляем ключ в массив
         if self.Tree[0] is None:
             self.Tree[0] = key
             return 0
