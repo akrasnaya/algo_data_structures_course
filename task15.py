@@ -54,11 +54,19 @@ class aBST:
         if self.FindKeyIndex(key) is None:
             return -1
 
+        if self.FindKeyIndex(key) == 0:
+            if self.Tree[0] == key:
+                return 0
+            elif key > self.Tree:
+                return 2
+            else:
+                return 1
+
         if self.FindKeyIndex(key) > 0:
             return self.FindKeyIndex(key)
         else:
             parent = -self.FindKeyIndex(key)
-            if key >= self.Tree[parent]:
+            if key > self.Tree[parent]:
                 ind = 2 * parent + 2
             else:
                 ind = 2 * parent + 1
