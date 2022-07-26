@@ -57,7 +57,7 @@ class aBST:
         if self.FindKeyIndex(key) == 0:
             if self.Tree[0] == key:
                 return 0
-            elif key > self.Tree:
+            elif key > self.Tree[0]:
                 return 2
             else:
                 return 1
