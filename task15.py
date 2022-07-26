@@ -48,6 +48,7 @@ class aBST:
     def AddKey(self, key):
         # добавляем ключ в массив
 
+        # добавляем ключ в массив
         if self.Tree[0] is None:
             self.Tree[0] = key
             return 0
@@ -55,29 +56,13 @@ class aBST:
         if self.FindKeyIndex(key) is None:
             return -1
 
-        def search(node):
-            if node is None:
-                return -1
-            elif key == node:
-                ind = self.Tree.index(node)
-                return ind
-            elif key < node:
-                ind = self.Tree.index(node)
-                left = 2 * ind + 1
-                if left > len(self.Tree) - 1:
-                    return -1
-                if self.Tree[left] is None:
-                    self.Tree[left] = key
-                    return left
-                return search(self.Tree[left])
+        if self.FindKeyIndex(key) > 0:
+            return self.FindKeyIndex(key)
+        else:
+            parent = -self.FindKeyIndex(key)
+            if key >= self.Tree[parent]:
+                ind = 2 * parent + 2
             else:
-                ind = self.Tree.index(node)
-                right = 2 * ind + 2
-                if right > len(self.Tree):
-                    return -1
-                if self.Tree[right] is None:
-                    self.Tree[right] = key
-                    return right
-                return search(self.Tree[right])
-
-        return search(self.Tree[0])
+                ind = 2 * parent + 1
+            self.Tree[ind] = key
+            return ind
