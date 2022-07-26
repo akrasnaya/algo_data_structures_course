@@ -21,7 +21,7 @@ class aBST:
 
         def search(node):
             if node is None:
-                return None
+                return 
             elif key == node:
                 ind = self.Tree.index(node)
                 return ind
