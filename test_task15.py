@@ -13,7 +13,7 @@ def create_sparse_tree_to_test():
 
 def create_empty_tree_to_test():
     tree = aBST(0)
-    tree.Tree = [None]
+    tree.Tree = [None, None, None]
     return tree
 
 class TestABST(unittest.TestCase):
@@ -33,7 +33,7 @@ class TestABST(unittest.TestCase):
         sparse_tree = create_sparse_tree_to_test()
         self.assertEqual(sparse_tree.FindKeyIndex(0), -1)
         self.assertEqual(sparse_tree.FindKeyIndex(11), -2)
-        self.assertEqual(sparse_tree.FindKeyIndex(80), None)
+        self.assertEqual(sparse_tree.FindKeyIndex(80), -6)
 
     def test_find_unexisting_key_empty_tree(self):
         empty_tree = create_empty_tree_to_test()
@@ -41,6 +41,7 @@ class TestABST(unittest.TestCase):
 
     def test_add_key_full_tree(self):
         full_tree = create_full_tree_to_test()
+        self.assertEqual(full_tree.AddKey(10), 0)
         self.assertEqual(full_tree.AddKey(15), -1)
         self.assertEqual(full_tree.AddKey(12), 2)
 
@@ -54,8 +55,9 @@ class TestABST(unittest.TestCase):
     def test_add_key_empty_tree(self):
         empty_tree = create_empty_tree_to_test()
         self.assertEqual(empty_tree.AddKey(10), 0)
-
-
+        self.assertEqual(empty_tree.AddKey(12), 2)
+        self.assertEqual(empty_tree.AddKey(8), 1)
+        self.assertEqual(empty_tree.AddKey(0), -1)
 
 
 if __name__ == '__main__':
