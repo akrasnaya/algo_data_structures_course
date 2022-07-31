@@ -63,7 +63,26 @@ class TestABST(unittest.TestCase):
         tree = create_full_tree_to_test()
         tree.Tree[3] = None
         self.assertEqual(tree.AddKey(500), -1)
-   
+        
+   def test_fill_example_tree(self):
+        tree = aBST(2)
+        self.assertEqual(tree.AddKey(50), 0)
+        self.assertEqual(tree.AddKey(25), 1)
+        self.assertEqual(tree.AddKey(75), 2)
+        self.assertEqual(tree.AddKey(37), 4)
+        self.assertEqual(tree.AddKey(62), 5)
+        self.assertEqual(tree.AddKey(84), 6)
+        self.assertEqual(tree.AddKey(31), 9)
+        self.assertEqual(tree.AddKey(43), 10)
+        self.assertEqual(tree.AddKey(55), 11)
+        self.assertEqual(tree.AddKey(92), 14)
+        self.assertEqual(tree.AddKey(500), -1)
+        self.assertListEqual(tree.Tree, [50, 25, 75, None, 37, 62, 84, None, None, 31, 43, 55, None, None, 92])
+
+    def test_add_500_example_tree(self):
+        tree = aBST(2)
+        tree.Tree = [50, 25, 75, None, 37, 62, 84, None, None, 31, 43, 55, None, None, 92]
+        self.assertEqual(tree.AddKey(500), -1)
 
 
 if __name__ == '__main__':
