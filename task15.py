@@ -3,14 +3,15 @@ class aBST:
     def __init__(self, depth):
         # правильно рассчитайте размер массива для дерева глубины depth:
         tree_size = 0
-        for i in range(depth + 1):
+        for i in range(depth + 2):
             tree_size += 2 ** i
         self.Tree = [None] * tree_size # массив ключей
 
     def FindKeyIndex(self, key):
         # ищем в массиве индекс ключа
         if self.Tree[0] is None:
-            return -0
+            return 0
+
 
         if None not in self.Tree and key not in self.Tree:
             return None
@@ -21,7 +22,7 @@ class aBST:
 
         def search(node):
             if node is None:
-                return 
+                return
             elif key == node:
                 ind = self.Tree.index(node)
                 return ind
@@ -31,7 +32,7 @@ class aBST:
                 if left > len(self.Tree) - 1:
                     return None
                 if self.Tree[left] is None:
-                    return -ind
+                    return -left
                 return search(self.Tree[left])
             elif key > node:
                 ind = self.Tree.index(node)
@@ -39,7 +40,7 @@ class aBST:
                 if right > len(self.Tree):
                     return None
                 if self.Tree[right] is None:
-                    return -ind
+                    return -right
                 return search(self.Tree[right])
 
         return search(self.Tree[0])
@@ -47,10 +48,6 @@ class aBST:
 
     def AddKey(self, key):
         # добавляем ключ в массив
-        
-        if self.FindKeyIndex(key) is None:
-            return -1
-        
         if self.Tree[0] is None:
             self.Tree[0] = key
             return 0
@@ -71,14 +68,11 @@ class aBST:
         if self.FindKeyIndex(key) > 0:
             return self.FindKeyIndex(key)
         else:
-            parent = -self.FindKeyIndex(key)
-            if key > self.Tree[parent]:
-                ind = 2 * parent + 2
-            else:
-                ind = 2 * parent + 1
+            ind = -self.FindKeyIndex(key)
             self.Tree[ind] = key
             return ind
-        
+
+
         def search(node):
             if node is None:
                 return -1
