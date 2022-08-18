@@ -19,9 +19,8 @@ class BalancedBST:
         sorted_a = sorted(a)
         root_ind = len(sorted_a) // 2
         root = sorted_a[root_ind]
-        tree = BalancedBST()
-        tree.Root = BSTNode(root, None)
-        tree.Root.Level = 0
+        self.Root = BSTNode(root, None)
+        self.Root.Level = 0
 
 
         def fill_tree(array, ind, parent_node, level):
@@ -42,9 +41,9 @@ class BalancedBST:
             if len(right_part) > 0:
                 fill_tree(right_part, right_centre, right_child, level + 1)
 
-        fill_tree(sorted_a, root_ind, tree.Root, tree.Root.Level)
+        fill_tree(sorted_a, root_ind, self.Root, self.Root.Level)
 
-        return tree
+        return self
 
 
 
