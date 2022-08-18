@@ -1,6 +1,6 @@
 class BSTNode:
 
-    def init(self, key, parent):
+    def __init__(self, key, parent):
         self.NodeKey = key  # ключ узла
         self.Parent = parent  # родитель или None для корня
         self.LeftChild = None  # левый потомок
@@ -10,7 +10,7 @@ class BSTNode:
 
 class BalancedBST:
 
-    def init(self):
+    def __init__(self):
         self.Root = None  # корень дерева
 
 
@@ -20,9 +20,7 @@ class BalancedBST:
         root_ind = len(sorted_a) // 2
         root = sorted_a[root_ind]
         tree = BalancedBST()
-        tree.init()
-        tree.Root = BSTNode()
-        tree.Root.init(root, None)
+        tree.Root = BSTNode(root, None)
         tree.Root.Level = 0
 
 
@@ -30,15 +28,13 @@ class BalancedBST:
             left_part = array[:ind]
             if len(left_part) > 0:
                 left_centre = len(left_part) // 2
-                left_child = BSTNode()
-                left_child.init(left_part[left_centre], parent_node)
+                left_child = BSTNode(left_part[left_centre], parent_node)
                 left_child.Level = level + 1
                 parent_node.LeftChild = left_child
             right_part = array[ind + 1:]
             if len(right_part) > 0:
                 right_centre = len(right_part) // 2
-                right_child = BSTNode()
-                right_child.init(right_part[right_centre], parent_node)
+                right_child = BSTNode(right_part[right_centre], parent_node)
                 right_child.Level = level + 1
                 parent_node.RightChild = right_child
             if len(left_part) > 0:
