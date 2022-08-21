@@ -42,6 +42,22 @@ class Heap:
 
     def GetMax(self):
     # вернуть значение корня и перестроить кучу
+        def max_heap(array, ind):
+
+            largest = ind
+            left = 2 * ind + 1
+            right = 2 * ind + 2
+
+            if left < len(array) and array[left] > array[largest]:
+                largest = left
+
+            if right < len(array) and array[right] > array[largest]:
+                largest = right
+
+            if largest != ind:
+                array[ind], array[largest] = array[largest], array[ind]
+                max_heap(array, largest)
+
         if len(self.HeapArray) == 0:
             return -1  # если куча пуста
         root = self.HeapArray[0]
@@ -51,26 +67,11 @@ class Heap:
             ind = -1
         self.HeapArray[0] = self.HeapArray[ind]
         self.HeapArray[ind] = None
+        arr = self.HeapArray[:ind - 1]
 
-        i = 0
-        while self.HeapArray[i] is not None and self.HeapArray[2 * i + 1] is not None and i < len(self.HeapArray) - 2:
-            if self.HeapArray[i] < self.HeapArray[2 * i + 1]:
-                temp = self.HeapArray[i]
-                if self.HeapArray[2 * i + 1] > self.HeapArray[2 * i + 2]:
-                    self.HeapArray[i] = self.HeapArray[2 * i + 1]
-                    self.HeapArray[2 * i + 1] = temp
-                else:
-                    self.HeapArray[i] = self.HeapArray[2 * i + 2]
-                    self.HeapArray[2 * i + 2] = temp
-            elif self.HeapArray[i] < self.HeapArray[2 * i + 2]:
-                temp = self.HeapArray[i]
-                if self.HeapArray[2 * i + 1] > self.HeapArray[2 * i + 2]:
-                    self.HeapArray[i] = self.HeapArray[2 * i + 1]
-                    self.HeapArray[2 * i + 1] = temp
-                else:
-                    self.HeapArray[i] = self.HeapArray[2 * i + 2]
-                    self.HeapArray[2 * i + 2] = temp
-            i = i + 1
+        max_heap(arr, 0)
+
+        self.HeapArray[:len(arr)] = arr
 
         return root
 
