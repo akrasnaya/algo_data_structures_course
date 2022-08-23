@@ -11,12 +11,13 @@ class SimpleGraph:
         self.m_adjacency = [[0] * size for _ in range(size)]
         self.vertex = [None] * size
 
-    def AddVertex(self, v):
+    def AddVertex(self, value):
         # ваш код добавления новой вершины
         # с значением value
         # в свободное место массива vertex
-        new_vertex = Vertex(v)
-        self.vertex[v] = new_vertex
+        new_vertex = Vertex(value)
+        ind = self.vertex.index(None)
+        self.vertex[ind] = new_vertex
         pass
 
         # здесь и далее, параметры v -- индекс вершины
@@ -25,9 +26,9 @@ class SimpleGraph:
     def RemoveVertex(self, v):
         # ваш код удаления вершины со всеми её рёбрами
         self.vertex[v] = None
-        del self.m_adjacency[v]
+        self.m_adjacency[v] = [0] * len(self.m_adjacency[v])
         for row in self.m_adjacency:
-            del row[v]
+            row[v] = 0
 
         pass
 
@@ -46,3 +47,4 @@ class SimpleGraph:
         # удаление ребра между вершинами v1 и v2
         self.m_adjacency[v1][v2], self.m_adjacency[v2][v1] = 0, 0
         pass
+
