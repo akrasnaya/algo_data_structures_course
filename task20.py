@@ -54,10 +54,12 @@ class SimpleTree:
         NewParent.Children.append(OriginalNode)
         OriginalNode.Parent.Children.remove(OriginalNode)
 
-    def Count(self):
+def Count(self):
         if self.Root is None:
             return 0
-        count_knit = 1
+        if len(self.Root.Children) == 0:
+            return 1
+        count_knit = 0
         nodes = []
         nodes.append(self.Root)
         while len(nodes) > 0:
@@ -72,7 +74,7 @@ class SimpleTree:
 
     def LeafCount(self):
         # количество листьев в дереве
-        if self.Root is None:
+        if self.Root is None or len(self.Root.Children) == 0:
             return 0
         count_leaves = 0
         nodes = []
