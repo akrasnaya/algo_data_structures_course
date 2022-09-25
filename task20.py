@@ -1,9 +1,9 @@
 class SimpleTreeNode:
 
     def __init__(self, val, parent):
-        self.NodeValue = val # значение в узле
-        self.Parent = parent # родитель или None для корня
-        self.Children = [] # список дочерних узлов
+        self.NodeValue = val  # значение в узле
+        self.Parent = parent  # родитель или None для корня
+        self.Children = []  # список дочерних узлов
 
 class SimpleTree:
 
@@ -54,7 +54,7 @@ class SimpleTree:
         NewParent.Children.append(OriginalNode)
         OriginalNode.Parent.Children.remove(OriginalNode)
 
-def Count(self):
+    def Count(self):
         if self.Root is None:
             return 0
         if len(self.Root.Children) == 0:
