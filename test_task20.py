@@ -22,6 +22,20 @@ def create_empty_tree():
     tree1 = SimpleTree(root)
     return tree1
 
+def create_even_tree_to_test():
+    root = SimpleTreeNode(1, None)
+    tree = SimpleTree(root)
+    tree.AddChild(root, SimpleTreeNode(2, root))
+    tree.AddChild(root, SimpleTreeNode(3, root))
+    tree.AddChild(root, SimpleTreeNode(6, root))
+    tree.AddChild(root.Children[0], SimpleTreeNode(5, root.Children[0]))
+    tree.AddChild(root.Children[0], SimpleTreeNode(7, root.Children[0]))
+    tree.AddChild(root.Children[1], SimpleTreeNode(4, root.Children[1]))
+    tree.AddChild(root.Children[2], SimpleTreeNode(8, root.Children[2]))
+    tree.AddChild(root.Children[2].Children[0], SimpleTreeNode(9, root.Children[2].Children[0]))
+    tree.AddChild(root.Children[2].Children[0], SimpleTreeNode(10, root.Children[2].Children[0]))
+    return tree
+
 
 class TestTree(unittest.TestCase):
     def test_count_nodes_full_tree(self):
@@ -34,10 +48,14 @@ class TestTree(unittest.TestCase):
 
     def test_count_node_empty_tree(self):
         tree = create_empty_tree()
-        self.assertEqual(tree.Count(), 1)
+        self.assertEqual(tree.Count(), 0)
 
     def test_count_leaves_empty_tree(self):
         tree = create_empty_tree()
-        self.assertEqual(tree.LeafCount(), 0)
+        self.assertEqual(tree.LeafCount(), 1)
+
+    def test_count_even_tree(self):
+        tree = create_even_tree_to_test()
+        self.assertListEqual(tree.EvenTrees(), [1, 3, 1, 6])
 
 
