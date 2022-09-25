@@ -83,17 +83,22 @@ class SimpleTree:
 
         return count_leaves
 
-    def EvenTrees(self):
+    def create_matrix_from_tree(self):
+        size = self.Count()
         nodes = self.GetAllNodes()
-        total_num = len(nodes)
-        tree_matrix = [[0] * total_num for _ in range(total_num)]
-
+        tree_matrix = [[] for _ in range(size + 2)]
         for i in range(len(nodes)):
             #if len(nodes[i].Children) != 0:
             for child in nodes[i].Children:
                 child_ind = nodes.index(child)
-                tree_matrix[i][child_ind], tree_matrix[child_ind][i] = 1, 1
+                tree_matrix[i].append(child.NodeValue)
+                tree_matrix[child_ind].append(nodes[i].NodeValue)
+        return tree_matrix
 
+    def EvenTrees(self):
+        nodes = self.GetAllNodes()
+        total_num = self.Count()
+        tree_matrix = self.create_matrix_from_tree()
         def find_link_to_break(tree, visited, res, node):
             num, temp = 0, 0
             visited[node] = 1
@@ -105,13 +110,18 @@ class SimpleTree:
                         num += temp
                     else:
                         res.append(node)
-                        res.append(i)
-            return num + 1
+                        #res.append(i)
+            return  num + 1
 
 
-        visited = [0] * total_num
+        visited = [0] * (total_num + 2)
         nodes_to_break_link = []
         find_link_to_break(tree_matrix, visited, nodes_to_break_link, 0)
-        result = [nodes[i].NodeValue for i in nodes_to_break_link]
+        result = [node for node in nodes_to_break_link][:2]
+        fin = []
+        for i in result:
+            for node in nodes:
+                if node.NodeValue == 1 or node.NodeValue == i:
+                    fin.append(node)
 
-        return result
+        return fin
