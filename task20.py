@@ -55,19 +55,15 @@ class SimpleTree:
         OriginalNode.Parent.Children.remove(OriginalNode)
 
     def Count(self):
-        if self.Root is None or len(self.Root.Children) == 0:
-            return 0
-        count_knit = 1
-        nodes = []
-        nodes.append(self.Root)
-        while len(nodes) > 0:
-            node = nodes.pop()
-            if len(node.Children) != 0:
-                count_knit += 1
-                for child in node.Children:
-                    nodes.append(child)
+        def calculate_count(node):
+            if node is None:
+                return 0
+            count = 1
+            for child in node.Children:
+                count += calculate_count(child)
+            return count
 
-        return count_knit
+        return calculate_count(self.Root)
 
 
     def LeafCount(self):
@@ -93,10 +89,10 @@ class SimpleTree:
         tree_matrix = [[0] * total_num for _ in range(total_num)]
 
         for i in range(len(nodes)):
-            if len(nodes[i].Children) != 0:
-                for child in nodes[i].Children:
-                    child_ind = nodes.index(child)
-                    tree_matrix[i][child_ind], tree_matrix[child_ind][i] = 1, 1
+            #if len(nodes[i].Children) != 0:
+            for child in nodes[i].Children:
+                child_ind = nodes.index(child)
+                tree_matrix[i][child_ind], tree_matrix[child_ind][i] = 1, 1
 
         def find_link_to_break(tree, visited, res, node):
             num, temp = 0, 0
