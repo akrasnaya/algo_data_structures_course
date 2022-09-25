@@ -57,7 +57,7 @@ class SimpleTree:
     def Count(self):
         if self.Root is None or len(self.Root.Children) == 0:
             return 0
-        count_knit = 0
+        count_knit = 1
         nodes = []
         nodes.append(self.Root)
         while len(nodes) > 0:
@@ -74,8 +74,6 @@ class SimpleTree:
         # количество листьев в дереве
         if self.Root is None:
             return 0
-        if len(self.Root.Children) == 0:
-            return 1
         count_leaves = 0
         nodes = []
         nodes.append(self.Root)

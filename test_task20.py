@@ -25,15 +25,15 @@ def create_empty_tree():
 def create_even_tree_to_test():
     root = SimpleTreeNode(1, None)
     tree = SimpleTree(root)
-    tree.AddChild(root, SimpleTreeNode(2, root))
-    tree.AddChild(root, SimpleTreeNode(3, root))
-    tree.AddChild(root, SimpleTreeNode(6, root))
-    tree.AddChild(root.Children[0], SimpleTreeNode(5, root.Children[0]))
-    tree.AddChild(root.Children[0], SimpleTreeNode(7, root.Children[0]))
-    tree.AddChild(root.Children[1], SimpleTreeNode(4, root.Children[1]))
-    tree.AddChild(root.Children[2], SimpleTreeNode(8, root.Children[2]))
-    tree.AddChild(root.Children[2].Children[0], SimpleTreeNode(9, root.Children[2].Children[0]))
-    tree.AddChild(root.Children[2].Children[0], SimpleTreeNode(10, root.Children[2].Children[0]))
+    tree.AddChild(root, SimpleTreeNode(2, None))
+    tree.AddChild(root, SimpleTreeNode(3, None))
+    tree.AddChild(root, SimpleTreeNode(6, None))
+    tree.AddChild(root.Children[0], SimpleTreeNode(5, None))
+    tree.AddChild(root.Children[0], SimpleTreeNode(7, None))
+    tree.AddChild(root.Children[1], SimpleTreeNode(4, None))
+    tree.AddChild(root.Children[2], SimpleTreeNode(8, None))
+    tree.AddChild(root.Children[2].Children[0], SimpleTreeNode(9, None))
+    tree.AddChild(root.Children[2].Children[0], SimpleTreeNode(10, None))
     return tree
 
 
