@@ -106,7 +106,6 @@ class SimpleGraph:
                     return find_path(self.vertex.index(vert), VTo)
             visited.pop(0)
             path.pop()
-            if visited.size() == 0:
-                return []
+            return []
 
         return find_path(VFrom, VTo)
