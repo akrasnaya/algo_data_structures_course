@@ -1,5 +1,3 @@
-from task5 import Queue
-
 class Vertex:
 
     def __init__(self, val):
@@ -23,9 +21,7 @@ class SimpleGraph:
         self.vertex[ind] = new_vertex
         pass
 
-        # здесь и далее, параметры v -- индекс вершины
 
-    # в списке  vertex
     def RemoveVertex(self, v):
         # ваш код удаления вершины со всеми её рёбрами
         self.vertex[v] = None
@@ -83,10 +79,6 @@ class SimpleGraph:
         return find_path(VFrom, VTo)
 
     def BreadthFirstSearch(self, VFrom, VTo):
-        # узлы задаются позициями в списке vertex
-        # возвращается список узлов -- путь из VFrom в VTo
-        # или [] если пути нету
-
         path = []
         visited = []
         for vert in self.vertex:
@@ -109,3 +101,4 @@ class SimpleGraph:
             return []
 
         return find_path(VFrom, VTo)
+
