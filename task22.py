@@ -80,27 +80,28 @@ class SimpleGraph:
 
     def BreadthFirstSearch(self, VFrom, VTo):
         path = []
-        visited = []
+        queue = []
         for vert in self.vertex:
             vert.Hit = False
 
-        def find_path(v, VTo):
-            current = self.vertex[v]
-            current.Hit = True
-            path.append(current)
-            visited.append(current)
-            if self.IsEdge(v, VTo):
-                path.append(self.vertex[VTo])
-                return path
-            visited.extend(self.GetClosestVerts(v))
-            for vert in visited:
-                if not vert.Hit:
-                    return find_path(self.vertex.index(vert), VTo)
-            visited.pop(0)
-            path.pop()
-            if len(visited) != 0:
-                return find_path(visited[0], VTo)
-            return []
+        current = self.vertex[VFrom]
+        current.Hit = True
+        path.append(current)
+        queue.append(current)
 
-        return find_path(VFrom, VTo)
+        if self.IsEdge(VFrom, VTo):
+            path.append(self.vertex[VTo])
+            return path
 
+        while queue:
+            current = queue.pop(0)
+            #path.pop()
+            for neighbour in self.GetClosestVerts(self.vertex.index(current)):
+                if not neighbour.Hit:
+                    neighbour.Hit = True
+                    queue.append(neighbour)
+                    path.append(neighbour)
+                    if self.IsEdge(self.vertex.index(neighbour), VTo):
+                        path.append(self.vertex[VTo])
+                        return path
+        return []
