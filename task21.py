@@ -76,8 +76,7 @@ class SimpleGraph:
                 if not neighbour.Hit:
                     return find_path(self.vertex.index(neighbour), VTo)
             path.pop()
-            if len(path) == 0:
-                return []
+            return []
         return find_path(VFrom, VTo)
 
 
