@@ -95,7 +95,7 @@ class SimpleGraph:
 
         while queue:
             current = queue.pop(0)
-            #path.pop()
+
             for neighbour in self.GetClosestVerts(self.vertex.index(current)):
                 if not neighbour.Hit:
                     neighbour.Hit = True
@@ -104,4 +104,5 @@ class SimpleGraph:
                     if self.IsEdge(self.vertex.index(neighbour), VTo):
                         path.append(self.vertex[VTo])
                         return path
+            path.pop()
         return []
