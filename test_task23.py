@@ -38,6 +38,7 @@ def create_graph_without_weak():
     graph1.AddEdge(1, 2)
     graph1.AddEdge(1, 3)
     graph1.AddEdge(2, 3)
+    return graph1
 
 
 
@@ -49,16 +50,7 @@ class TestWeakVers(unittest.TestCase):
         self.assertListEqual(weaks, ['E', 'I', 'K'])
 
     def test_not_find_weak(self):
-        graph1 = SimpleGraph(4)
-        graph1.AddVertex('A')
-        graph1.AddVertex('B')
-        graph1.AddVertex('C')
-        graph1.AddVertex('D')
-        graph1.AddEdge(0, 1)
-        graph1.AddEdge(0, 2)
-        graph1.AddEdge(1, 2)
-        graph1.AddEdge(1, 3)
-        graph1.AddEdge(2, 3)
-        weaks = graph1.WeakVertices()
+        graph = create_graph_without_weak()
+        weaks = graph.WeakVertices()
         self.assertListEqual(weaks, [])
 
